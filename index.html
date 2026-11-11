@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!--
   DEUCIFY — Aplikasi skor tennis (by reshafandy)
-  version 1.1
   =============================================================
   Satu file HTML mandiri (tanpa library luar). Cukup unggah sebagai index.html.
 
@@ -687,6 +686,20 @@ body {
   margin: 0;
 }
 
+/* Tombol donasi Saweria (hanya tampil di halaman menu, di atas credit) */
+#donate {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: var(--a);
+  color: var(--onA);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+#donate:active { transform: scale(.97); }
 #credit {
   text-align: center;
   font-size: 12px;
@@ -758,7 +771,10 @@ body {
   </div>
 </div>
 <!-- CREDIT -->
-<footer id="credit">Deucify app by reshafandy</footer>
+<footer id="credit">
+  <a id="donate" href="https://saweria.co/omrex" target="_blank" rel="noopener">☕ Traktir kopi</a><br>
+  Deucify app by reshafandy
+</footer>
 <!-- POPUP 1: hasil match (muncul saat match selesai) -->
 <div class="win" id="win">
   <div>
@@ -1171,6 +1187,7 @@ const MODES={
 /** Pindah layar: "home" | "info" | "setup" | "play". Menutup semua popup dulu. */
 function show(s){
   screen=s;const p=s==="play";
+  $("donate").style.display = p ? "none" : "inline-block"; // donasi hanya di halaman menu
   ["win","cfg","lb"].forEach(id=>$(id).classList.remove("show"));
   $("play").style.display=p?"flex":"none";
   $("menu").style.display=p?"none":"flex";
@@ -1373,6 +1390,7 @@ const E = {
   "Lanjutkan pertandingan": "Resume match",
   "Isi pengaturan, lalu mulai bermain.": "Fill in the settings, then start playing.",
   "Jenis permainan": "Game type",
+  "☕ Traktir kopi": "☕ Buy me a coffee",
   "Aturan deuce": "Deuce rule",
   "Tanpa deuce. Di 40-40, satu poin langsung menentukan game.": "No deuce. At 40-40, one point decides the game.",
   "Maksimal 2 deuce, lalu satu poin penentu.": "Max 2 deuces, then one deciding point.",
