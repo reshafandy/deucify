@@ -686,10 +686,11 @@ body {
   margin: 0;
 }
 
-/* Tombol donasi Saweria (hanya tampil di halaman menu, di atas credit) */
+/* Tombol donasi Saweria (hanya tampil di halaman awal, di atas credit) */
 #donate {
-  display: inline-block;
-  margin-bottom: 6px;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 6px;
   padding: 8px 18px;
   border-radius: 20px;
   background: var(--a);
@@ -772,7 +773,7 @@ body {
 </div>
 <!-- CREDIT -->
 <footer id="credit">
-  <a id="donate" href="https://saweria.co/omrex" target="_blank" rel="noopener">☕ Traktir kopi</a><br>
+  <a id="donate" href="https://saweria.co/omrex" target="_blank" rel="noopener">☕ Traktir kopi</a>
   Deucify app by reshafandy
 </footer>
 <!-- POPUP 1: hasil match (muncul saat match selesai) -->
@@ -1187,7 +1188,7 @@ const MODES={
 /** Pindah layar: "home" | "info" | "setup" | "play". Menutup semua popup dulu. */
 function show(s){
   screen=s;const p=s==="play";
-  $("donate").style.display = p ? "none" : "inline-block"; // donasi hanya di halaman menu
+  $("donate").style.display = "none"; // disembunyikan dulu; renderMenu() menampilkannya hanya di halaman awal
   ["win","cfg","lb"].forEach(id=>$(id).classList.remove("show"));
   $("play").style.display=p?"flex":"none";
   $("menu").style.display=p?"none":"flex";
@@ -1196,6 +1197,7 @@ function show(s){
 }
 /** Gambar layar menu sesuai variabel screen (home/info/setup), lalu pasang event-nya. */
 function renderMenu(){
+  $("donate").style.display = screen === "home" ? "" : "none"; // tombol donasi hanya di halaman awal
   let h="";
   if(screen==="home"){
     h+='<div class="hero"><p>Pilih mode permainan</p></div>';
